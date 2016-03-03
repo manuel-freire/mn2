@@ -12,6 +12,11 @@ The academic website of ManyNets is located at
 
 Academic papers, video demos and presentations can be found there
 
+### Building
+
+use `mvn install -DskipTests=true` to build (tests have not been restored yet); 
+inside the `manynets-app` folder, use `mvn nbm:run-platform` to run.
+
 ### Java options
 
 This program is very memory-hungry. You will need around 1.2 Gb to analyze even
