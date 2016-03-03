@@ -1,0 +1,235 @@
+/*
+ *  This file is part of ManyNets.
+ *
+ *  ManyNets is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU Lesser General Public License as 
+ *  published by the Free Software Foundation, either version 3 of the 
+ *  License, or (at your option) any later version.
+ *
+ *  ManyNets is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU Lesser General Public License for more details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with ManyNets.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ *  ManyNets was created at the Human Computer Interaction Lab, 
+ *  University of Maryland at College Park. See the README file for details
+ */
+
+package edu.umd.cs.hcil.manynets.ui;
+
+import edu.umd.cs.hcil.manynets.engines.ExpressionCalculator;
+import edu.umd.cs.hcil.manynets.model.PGraph;
+import edu.umd.cs.hcil.manynets.model.Stat;
+import edu.umd.cs.hcil.manynets.model.TableWrapper;
+import edu.umd.cs.hcil.manynets.model.Transform;
+import edu.umd.cs.hcil.manynets.model.TransformOptions;
+import edu.umd.cs.hcil.manynets.transforms.FilterNetsTransform;
+import org.jdom.Element;
+import org.python.core.Py;
+import prefuse.data.Edge;
+import prefuse.data.Graph;
+import prefuse.data.Node;
+
+/**
+ * A simple panel to ask for node-filtering instructions
+ * @author Manuel Freire
+ */
+public class ElementFilter extends javax.swing.JPanel {
+
+    private PythonPanel npp;
+    private PythonPanel epp;
+
+    /** Creates new form ElementFilter */
+    public ElementFilter(PGraph pg) {
+        initComponents();
+
+        npp = new PythonPanel(pg.getNodeTable().getTable(), null);
+        epp = new PythonPanel(pg.getEdgeTable().getTable(), null);
+        jpNodes.add(npp);
+        jpEdges.add(epp);
+    }
+
+    public String getNodeExp() {
+        return npp.getText().isEmpty() ?
+            (isRemoveNodeMatches() ? "False" : "True") :
+                npp.getText();
+    }
+
+    public String getEdgeExp() {
+        return epp.getText().isEmpty() ?
+            (isRemoveEdgeMatches() ? "False" : "True") :
+                epp.getText();
+    }
+
+    /**
+     * @return 'true' if remove-matches, 'false' if keep-only-matches
+     */
+    public boolean isRemoveNodeMatches() {
+        return jcbNodePolicy.getSelectedIndex() == 0;
+    }
+
+    /**
+     * @return 'true' if remove-matches, 'false' if keep-only-matches
+     */
+    public boolean isRemoveEdgeMatches() {
+        return jcbEdgePolicy.getSelectedIndex() == 0;
+    }
+
+    public Transform getTransform() {
+        return new FilterNetsTransform();
+    }
+
+    public TransformOptions getTransformOptions() {
+        return new FilterNetsTransform.NetFilterOptions() {
+            ExpressionCalculator nec = new ExpressionCalculator(
+                    new Stat("dummy-node-exp-name", "node filter", Boolean.TYPE,
+                        TableWrapper.Level.Node, TableWrapper.Level.Network),
+                        getNodeExp(), "O(1)");
+            ExpressionCalculator eec = new ExpressionCalculator(
+                    new Stat("dummy-node-exp-name", "node filter", Boolean.TYPE,
+                        TableWrapper.Level.Edge, TableWrapper.Level.Network),
+                        getEdgeExp(), "O(1)");
+
+            @Override
+            public boolean accepts(Graph g, Edge e) {
+                boolean v = Py.py2boolean(eec.evalTuple(e, null));
+                return isRemoveEdgeMatches() ? ! v : v;
+            }
+
+            @Override
+            public boolean accepts(Graph g, Node n) {
+                boolean v = Py.py2boolean(nec.evalTuple(n, null));
+                return isRemoveNodeMatches() ? ! v : v;
+            }
+
+            @Override
+            public void save(Element e) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public void load(Element e) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public String getDescription() {
+                String nodes = npp.getText().isEmpty() ? "" : "nodes "
+                        + (isRemoveNodeMatches() ? "not":"") + " "
+                        + getNodeExp();
+                String edges = epp.getText().isEmpty() ? "" : "edges "
+                        + (isRemoveEdgeMatches() ? "not":"") + " "
+                        + getEdgeExp();
+                return "filtered: "
+                        + nodes + (nodes.isEmpty() ? "": ", ")
+                        + edges;
+            }
+        };
+    }
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jpNodes = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jcbNodePolicy = new javax.swing.JComboBox();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jpEdges = new javax.swing.JPanel();
+        jPanel4 = new javax.swing.JPanel();
+        jcbEdgePolicy = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+
+        setLayout(new java.awt.GridBagLayout());
+
+        jpNodes.setBorder(javax.swing.BorderFactory.createTitledBorder("Node filter"));
+        jpNodes.setLayout(new java.awt.BorderLayout());
+
+        jPanel3.setLayout(new java.awt.GridBagLayout());
+
+        jcbNodePolicy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Remove", "Keep only", " " }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 8, 0);
+        jPanel3.add(jcbNodePolicy, gridBagConstraints);
+
+        jLabel1.setText("nodes that match; any edges attached to a removed node will also be removed.");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 8, 0);
+        jPanel3.add(jLabel1, gridBagConstraints);
+
+        jPanel5.setLayout(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel3.add(jPanel5, gridBagConstraints);
+
+        jpNodes.add(jPanel3, java.awt.BorderLayout.NORTH);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        add(jpNodes, gridBagConstraints);
+
+        jpEdges.setBorder(javax.swing.BorderFactory.createTitledBorder("Edge filter"));
+        jpEdges.setLayout(new java.awt.BorderLayout());
+
+        jPanel4.setLayout(new java.awt.GridBagLayout());
+
+        jcbEdgePolicy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Remove", "Keep only", " " }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 0, 8, 0);
+        jPanel4.add(jcbEdgePolicy, gridBagConstraints);
+
+        jLabel2.setText("edges that match; any nodes attached to a removed edge will also be removed.");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 8, 0);
+        jPanel4.add(jLabel2, gridBagConstraints);
+
+        jPanel6.setLayout(null);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.weightx = 1.0;
+        jPanel4.add(jPanel6, gridBagConstraints);
+
+        jpEdges.add(jPanel4, java.awt.BorderLayout.NORTH);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTHWEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.weighty = 1.0;
+        add(jpEdges, gridBagConstraints);
+    }// </editor-fold>//GEN-END:initComponents
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JComboBox jcbEdgePolicy;
+    private javax.swing.JComboBox jcbNodePolicy;
+    private javax.swing.JPanel jpEdges;
+    private javax.swing.JPanel jpNodes;
+    // End of variables declaration//GEN-END:variables
+
+}

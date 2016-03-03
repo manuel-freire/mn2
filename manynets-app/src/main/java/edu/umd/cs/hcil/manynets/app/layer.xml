@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.2//EN" "http://www.netbeans.org/dtds/filesystem-1_2.dtd">
+<filesystem>
+    <folder name="Actions">
+        <folder name="File">
+            <file name="edu-umd-cs-hcil-manynets-actions-OpenFileAction.instance">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="edu.umd.cs.hcil.manynets.app.Bundle"/>
+                <attr name="delegate" newvalue="edu.umd.cs.hcil.manynets.actions.OpenFileAction"/>
+                <attr name="displayName" bundlevalue="edu.umd.cs.hcil.manynets.actions.Bundle#CTL_OpenFileAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="noIconInMenu" boolvalue="false"/>
+            </file>
+            <file name="edu-umd-cs-hcil-manynets-actions-SaveAsAction.instance">
+                <attr name="delegate" newvalue="edu.umd.cs.hcil.manynets.actions.SaveAsAction"/>
+                <attr name="displayName" bundlevalue="edu.umd.cs.hcil.manynets.actions.Bundle#CTL_SaveAsAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.awt.Actions.alwaysEnabled"/>
+                <attr name="noIconInMenu" boolvalue="false"/>
+            </file>
+        </folder>
+        <folder name="Window">
+            <file name="edu-umd-cs-hcil-manynets-HistoryAction.instance">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="edu.umd.cs.hcil.manynets.Bundle"/>
+                <attr name="component" methodvalue="edu.umd.cs.hcil.manynets.HistoryTopComponent.findInstance"/>
+                <attr name="displayName" bundlevalue="edu.umd.cs.hcil.manynets.Bundle#CTL_HistoryAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.windows.TopComponent.openAction"/>
+            </file>
+            <file name="edu-umd-cs-hcil-manynets-app-DetailsAction.instance">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="edu.umd.cs.hcil.manynets.Bundle"/>
+                <attr name="component" methodvalue="edu.umd.cs.hcil.manynets.app.DetailsTopComponent.findInstance"/>
+                <attr name="displayName" bundlevalue="edu.umd.cs.hcil.manynets.app.Bundle#CTL_DetailsAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.windows.TopComponent.openAction"/>
+            </file>
+            <file name="edu-umd-cs-hcil-manynets-app-HistoryAction.instance">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="edu.umd.cs.hcil.manynets.Bundle"/>
+                <attr name="component" methodvalue="edu.umd.cs.hcil.manynets.app.HistoryTopComponent.findInstance"/>
+                <attr name="displayName" bundlevalue="edu.umd.cs.hcil.manynets.app.Bundle#CTL_HistoryAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.windows.TopComponent.openAction"/>
+            </file>
+            <file name="edu-umd-cs-hcil-manynets-app-NetworkTopComponentAction.instance">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="edu.umd.cs.hcil.manynets.Bundle"/>
+                <attr name="component" methodvalue="edu.umd.cs.hcil.manynets.app.NetworkTopComponent.findInstance"/>
+                <attr name="displayName" bundlevalue="edu.umd.cs.hcil.manynets.app.Bundle#CTL_NetworkTopComponentAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.windows.TopComponent.openAction"/>
+            </file>
+            <file name="edu-umd-cs-hcil-manynets-app-SelectedAction.instance">
+                <attr name="component" methodvalue="edu.umd.cs.hcil.manynets.app.SelectedTopComponent.findInstance"/>
+                <attr name="displayName" bundlevalue="edu.umd.cs.hcil.manynets.app.Bundle#CTL_SelectedAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.windows.TopComponent.openAction"/>
+            </file>
+            <file name="edu-umd-cs-hcil-manynets-app-TableAction.instance">
+                <attr name="SystemFileSystem.localizingBundle" stringvalue="edu.umd.cs.hcil.manynets.Bundle"/>
+                <attr name="component" methodvalue="edu.umd.cs.hcil.manynets.app.TableTopComponent.findInstance"/>
+                <attr name="displayName" bundlevalue="edu.umd.cs.hcil.manynets.app.Bundle#CTL_TableAction"/>
+                <attr name="instanceCreate" methodvalue="org.openide.windows.TopComponent.openAction"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Menu">
+        <folder name="File">
+            <file name="edu-umd-cs-hcil-manynets-actions-OpenFileAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/File/edu-umd-cs-hcil-manynets-actions-OpenFileAction.instance"/>
+                <attr name="position" intvalue="750"/>
+            </file>
+            <file name="edu-umd-cs-hcil-manynets-actions-SaveAsAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/File/edu-umd-cs-hcil-manynets-actions-SaveAsAction.instance"/>
+                <attr name="position" intvalue="1650"/>
+            </file>
+        </folder>
+        <folder name="Window">
+            <file name="DetailsAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Window/edu-umd-cs-hcil-manynets-app-DetailsAction.instance"/>
+            </file>
+            <file name="HistoryAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Window/edu-umd-cs-hcil-manynets-app-HistoryAction.instance"/>
+            </file>
+            <file name="NetworkTopComponentAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Window/edu-umd-cs-hcil-manynets-app-NetworkTopComponentAction.instance"/>
+            </file>
+            <file name="SelectedAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Window/edu-umd-cs-hcil-manynets-app-SelectedAction.instance"/>
+            </file>
+            <file name="TableAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Window/edu-umd-cs-hcil-manynets-app-TableAction.instance"/>
+            </file>
+        </folder>
+    </folder>
+    <folder name="Windows2">
+        <folder name="Components">
+            <file name="DetailsTopComponent.settings" url="DetailsTopComponentSettings.xml"/>
+            <file name="HistoryTopComponent.settings" url="HistoryTopComponentSettings.xml"/>
+            <file name="NetworkTopComponentTopComponent.settings" url="NetworkTopComponentTopComponentSettings.xml"/>
+            <file name="SelectedTopComponent.settings" url="SelectedTopComponentSettings.xml"/>
+            <file name="TableTopComponent.settings" url="TableTopComponentSettings.xml"/>
+        </folder>
+        <folder name="Modes">
+            <folder name="editor">
+                <file name="TableTopComponent.wstcref" url="TableTopComponentWstcref.xml"/>
+            </folder>
+            <folder name="leftSlidingSide">
+                <file name="HistoryTopComponent.wstcref" url="HistoryTopComponentWstcref.xml"/>
+            </folder>
+            <folder name="output">
+                <file name="NetworkTopComponentTopComponent.wstcref" url="NetworkTopComponentTopComponentWstcref.xml"/>
+            </folder>
+            <folder name="rightSlidingSide">
+                <file name="DetailsTopComponent.wstcref" url="DetailsTopComponentWstcref.xml"/>
+                <file name="SelectedTopComponent.wstcref" url="SelectedTopComponentWstcref.xml"/>
+            </folder>
+        </folder>
+    </folder>
+</filesystem>

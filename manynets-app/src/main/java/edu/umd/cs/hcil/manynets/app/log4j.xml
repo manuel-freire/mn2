@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+              value="[%d{ISO8601}] %-5p %c %m %n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="DEBUG"/>
+            <param name="LevelMax" value="INFO"/>
+        </filter>
+    </appender>
+    <appender name="STDERR"  class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.err" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+              value="[%d{ISO8601}] %-5p %c %m %n" />
+        </layout>
+        <filter class="org.apache.log4j.varia.LevelRangeFilter">
+            <param name="LevelMin" value="WARN"/>
+            <param name="LevelMax" value="FATAL"/>
+        </filter>
+    </appender>
+
+    <!--                          -->
+    <!-- Declare the SMTPAppender -->
+    <!--                          -->
+       <!-- <appender name="EMAIL"  class="edu.umd.cs.hcil.socialaction.logging.SocialActionSMTPAppender">
+        <param name="BufferSize" value="100000" />
+        <param name="SMTPDebug" value="true" />
+        <param name="SMTPHost" value="smtp.cs.umd.edu" />
+        <param name="SMTPPort" value="587" />
+        <param name="From" value="socialaction.log@gmail.com" />
+        <param name="To" value="cdunne@cs.umd.edu" />
+        <param name="Subject" value="[SocialActionLogging] Adam Case Study" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%t] %p - %m%n"/>
+        </layout>
+    </appender>-->
+
+	<logger name="net.sf.jabref">
+		<!-- Print only messages of level warn or above in the package com.foo -->
+		<level value="warn"/> 
+    </logger>  
+	<logger name="org.java.plugin">
+    <!-- Print only messages of level warn or above in the package com.foo -->
+    <level value="warn"/> 
+    </logger>
+
+
+    <!--                           -->
+    <!-- setup log4j's root logger -->
+    <!--                           -->
+    <root>
+        <level value="all" />
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="STDERR"/>
+        <appender-ref ref="EMAIL" />
+    </root>
+</log4j:configuration>
+
